@@ -2,28 +2,34 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-			plus.sqlite.openDatabase({
+			var opened=plus.sqlite.isOpenDatabase({
 				name: "mhonor",
-				path: "_doc/mhonor.db",
-				success: function(e) {
-					console.log('open or create database[mhonor] success');
-					let sql =
-						"CREATE TABLE IF NOT EXISTS mhonor.application(id INT PRIMARY KEY AUTOINCREMENT NOT NULL,title varchar(50),note varchar(150),create_date datetimedefault (datetime('now', 'localtime')));";
-						plus.sqlite.executeSql({
-							name:"mhonor",
-							sql:sql,
-							success:function(e){
-								console.log('create table[application] success');
-							},
-							fail:function(e){
-								console.log('create table[application] failed: '+JSON.stringify(e));
-							}
-						});
+				path: "_doc/data.db"
+			});
+			if(!opened){
+				plus.sqlite.openDatabase({
+					name: "mhonor",
+					path: "_doc/data.db",
+					success: function(e) {
+						console.log('open or create database[mhonor] success');			
+					},
+					fail: function(e) {
+						console.log('open or create database[mhonor] failed: ' + JSON.stringify(e));
+					}
+				})
+			}
+			let sql =
+				"CREATE TABLE IF NOT EXISTS application(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,title varchar(50),note varchar(150),create_date datetime default (datetime('now', 'localtime')));";
+			plus.sqlite.executeSql({
+				name:"mhonor",
+				sql:sql,
+				success:function(e){
+					console.log('create table[application] success');
 				},
-				fail: function(e) {
-					console.log('open or create database[mhonor] failed: ' + JSON.stringify(e));
+				fail:function(e){
+					console.log('create table[application] failed: '+JSON.stringify(e));
 				}
-			})
+			});
 		},
 		onShow: function() {
 			console.log('App Show')

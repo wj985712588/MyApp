@@ -1,0 +1,22 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "\"# MyApp\"",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wj985712588/MyApp.git"
+  },
+  "author": "wj985712588",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wj985712588/MyApp/issues"
+  },
+  "homepage": "https://github.com/wj985712588/MyApp#readme",
+  "dependencies": {
+    "totp.js": "0.0.1"
+  }
+}
